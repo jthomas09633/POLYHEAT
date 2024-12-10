@@ -22,7 +22,6 @@ function result = twoPhaseAnalysis(localSegment,min_fit_length)
     % melt peak position
     [melt_peak,first_der,sec_der] = prep2PhaseData(localSegment);
     result.meltTemp = localSegment(melt_peak.peakPos,1);
-    melt_peak.peakPos
     % finding the peak positions of the first and second derivatives that are
     % significantly gearter than the noise level
     [localSegment_peaks_int,fder_peaks_int,sec_der_peaks_int] = ...
@@ -31,7 +30,6 @@ function result = twoPhaseAnalysis(localSegment,min_fit_length)
     % fits data from the start of the data growing toward the melt peak, will
     % pass through the glass transition
     solid_state_SOD = fitsStartOfData(localSegment,min_fit_length,sec_der_peaks_int);
-    whos("solid_state_SOD")
     % finding the end of the glass transition which is the start of the rubbery
     % or semi-solid state, this will also return the best solid state baseline
     [best_solid_state_fit,rubbery_state_start] = endOfSSPoint(min_fit_length,solid_state_SOD);

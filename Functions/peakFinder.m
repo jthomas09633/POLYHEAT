@@ -9,7 +9,8 @@ function [dataPeaksInt,fdPeaksInt,sdPeaksInt] = peakFinder(data,firstDer,secDer)
 %
 %   A cutoff for each normalized peak will be used to avoid noise. Peak
 %   signals will be kept if greater than 0.5
-%% Start of Analysis
+%   Start of Analysis
+%************************************************************************%
     [dPeaks,dLocs] = findpeaks(data(:,2)/max(data(:,2)));
     [fdPeaks,fdLocs] = findpeaks(firstDer(:,2)/max(firstDer(:,2)));
     [sdPeaks,sdLocs] = findpeaks(secDer(:,2)/max(secDer(:,2)));

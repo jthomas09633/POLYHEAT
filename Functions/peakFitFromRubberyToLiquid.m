@@ -31,7 +31,6 @@ function fullMeltFits = peakFitFromRubberyToLiquid(data,rsTrimmed,lsTrimmed,sdPe
     f = griddedInterpolant(funcData(:,1),funcData(:,2));
     F = @(t) f(t);
     parfor i = 1:loopLength
-        fprintf('Starting R2L Fit Set '+string(i)+'/'+string(loopLength)+'---- \n')
         meltArea = zeros(length(lsTrimmed),1);
         startPoint = rsTrimmed(i).short(end,1);
         slopeLeft = rsTrimmed(i).slope(1,1);

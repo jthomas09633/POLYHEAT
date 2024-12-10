@@ -8,7 +8,6 @@ function allFilesStruct = trimData(allFilesStruct)
 %FSC is trimmed using the startUpHookEstimator built on empirical evidence
 %of the average length per rate of a large sample of sensors
     for i = 1:length(allFilesStruct)
-        i
         if strcmp(allFilesStruct(i).source,'FSC File')
             for j = 1:length(allFilesStruct(i).cpHeating)
                 rate = allFilesStruct(i).ratesHeating(j);
