@@ -31,4 +31,4 @@ The actual output is a data structure of the key parameters/properties for a giv
 
 Below is a visualization of a single heating segment (same one as the initial example above) and the key parameters and baselines calculated for the entire curve.
 
-**Insert Figure Here** 
+![Alt text](/Images/outputVisualized.png)
