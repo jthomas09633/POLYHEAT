@@ -4,7 +4,7 @@ A MATLAB package for the analysis of the thermodynamic properties of polymers me
 
 
 # Conventional Heating Segment
-![Alt Text](/Images/eyeTestExample.tif)
+/Images/eyeTestExample.tif
 
 Broadly, these regions can be identified by eye (often referred to as the "eye-test"), but the determination of the true start and end points is highly variable. To overcome this, an automated process built on fundamental polymer physics is required.  
 
