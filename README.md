@@ -10,7 +10,9 @@ Download repository and extract file into desired folder.
 **Ensure you have the following toolboxes installed before running**
 
 ![Optimization Toolbox](https://www.mathworks.com/products/optimization.html)
+
 ![Parallel Computing Toolbox](https://www.mathworks.com/products/parallel-computing.html)
+
 ![Signal Processing Toolbox](https://www.mathworks.com/products/signal.html)
 
 Launch MATLAB
