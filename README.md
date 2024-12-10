@@ -3,6 +3,17 @@
 A MATLAB package for the analysis of the thermodynamic properties of polymers measured using Differential/Fast Scanning Calorimetry. This method was developed with the intention of removing the human component in analysis revolving around the determination of steady state and transition regions. 
 
 
+# How to Use
+
+>Download repository and extract file into desired folder. 
+>Launch MATLAB
+>Go to Home > Open > Project
+>Select the .prj file in the extracted folder
+>MATLAB will load the project and set it up automatically
+>Run main.m
+>Select the file or files you wish to analyze
+>Sit back, relax, grab a coffee, watch some cars go by, talk to co-worker, work on other things
+>Once the code is done analyzing open the variable dataStruct and your result will appear!
 # Conventional Heating Segment
 ![Alt text](/Images/eyeTestExample.png)
 
