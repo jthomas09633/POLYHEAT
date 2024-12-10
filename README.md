@@ -3,33 +3,34 @@
 A MATLAB package for the analysis of the thermodynamic properties of polymers measured using Differential/Fast Scanning Calorimetry. This method was developed with the intention of removing the human component in analysis revolving around the determination of steady state and transition regions. 
 
 
-# How to Use
+## How to Use
 
-Download repository and extract file into desired folder. 
+### Prerequisites
+Before running the project, ensure you have the following toolboxes installed:
 
-**Ensure you have the following toolboxes installed before running**
+- [Optimization Toolbox](https://www.mathworks.com/products/optimization.html)
+- [Parallel Computing Toolbox](https://www.mathworks.com/products/parallel-computing.html)
+- [Signal Processing Toolbox](https://www.mathworks.com/products/signal.html)
 
-![Optimization Toolbox](https://www.mathworks.com/products/optimization.html)
+#### To Install Toolboxes:
+1. Open MATLAB.
+2. Go to **Home > Add-Ons > Get Add-Ons**.
+3. Search for each toolbox by name (e.g., "Optimization Toolbox").
+4. Click **Install**.
 
-![Parallel Computing Toolbox](https://www.mathworks.com/products/parallel-computing.html)
+---
 
-![Signal Processing Toolbox](https://www.mathworks.com/products/signal.html)
+### Steps to Run the Project
+1. Download the repository and extract it to your desired folder.
+2. Launch MATLAB.
+3. Go to **Home > Open > Project**.
+4. Select the `.prj` file in the extracted folder.
+   - MATLAB will automatically load the project and set it up.
+5. Run the `main.m` file:
+6. Select the file(s) you wish to analyze 
+7. Sit back, relax, grab a coffee, watch some cars go by, talk to co-worker, work on other things
 
-Launch MATLAB
-
-Go to Home > Open > Project
-
-Select the .prj file in the extracted folder
-
-MATLAB will load the project and set it up automatically
-
-Run main.m
-
-Select the file or files you wish to analyze
-
-Sit back, relax, grab a coffee, watch some cars go by, talk to co-worker, work on other things
-
-Once the code is done analyzing open the variable dataStruct and your result will appear!
+Once the code is done analyzing open the variable `dataStruct` and your result will appear!
 
 # Conventional Heating Segment
 ![Alt text](/Images/eyeTestExample.png)
