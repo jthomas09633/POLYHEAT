@@ -1,6 +1,5 @@
 function [norm_yval,norm_deryval] = convDataSetup(localSegment)
-%CONVDATASETUP Summary of this function goes here
-%   Detailed explanation goes here
+%CONVDATASETUP setting up the data to be convolved. Normalizing the data.
     xval = localSegment(:,1);
     yval = localSegment(:,2);
     derY = sgolayfilt(gradient(yval)./gradient(xval),1,21);

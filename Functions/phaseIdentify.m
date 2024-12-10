@@ -4,7 +4,7 @@ function phaseDynamic = phaseIdentify(localSegment)
     %checks if the curve contains only a Tg
     result = tgSearch(localSegment);
     if result == -1
-        phaseDynamic = NaN;
+        phaseDynamic = 'No event';
     elseif result == 0
         phaseDynamic = convolutionAnalysis(localSegment);
     else

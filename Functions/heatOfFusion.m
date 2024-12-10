@@ -1,5 +1,5 @@
 function [heat_of_fusion_total,heat_of_fusion_first_contact,heat_of_fusion_secondary] ...
-    = heatOfFusion(localSegment,sec_der_peaks_int,best_baseline)
+    = heatOfFusion(localSegment,best_baseline,sec_der_peaks_int)
 %HEATOFFUSION Determines the melt area of the crystal melting in two ways
 % using the best found tanh baseline. The first area is the entire intergal
 % from the start of the rubbery state baseline to the end of the liquid
@@ -18,7 +18,9 @@ function [heat_of_fusion_total,heat_of_fusion_first_contact,heat_of_fusion_secon
 %*************************************************************************%
     f = griddedInterpolant(localSegment(:,1),localSegment(:,2));
     F = @(t) f(t);
-    h = griddedInterpolant(best_baseline(:,1),best_baseline(:,2));
+    xb = best_baseline(:,1);
+    yb = best_baseline(:,2);
+    h = griddedInterpolant(xb,yb);
     H = @(t) h(t);
     dataInt = integral(F,best_baseline(1,1),best_baseline(end,1));
     baseInt = integral(H,best_baseline(1,1),best_baseline(end,1));

@@ -1,6 +1,6 @@
 function [positive_peak_kernel,negative_peak_kernel,sigmoidal_kernel] = kernelSetup()
-%KERNELSETUP Summary of this function goes here
-%   Detailed explanation goes here
+%KERNELSETUP Intialization of the three kernels. kernel widths are
+%proportional to the expected widths of the signal itself. 
     % setting up kernels
     % positive kernel is a step function which is broad to capture the
     % relative width of a melt structure

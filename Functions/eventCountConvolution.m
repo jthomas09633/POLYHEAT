@@ -1,6 +1,5 @@
 function events = eventCountConvolution(pos_peaks_true_loc,neg_peaks_true_loc,sig_true_loc)
-%EVENTCOUNTCONVOLUTION Summary of this function goes here
-%   Detailed explanation goes here
+%EVENTCOUNTCONVOLUTION labels and counts each event.
     all_events = [sig_true_loc,neg_peaks_true_loc,pos_peaks_true_loc];
     all_events_sorted = sort(all_events);
     labeled_events = {};

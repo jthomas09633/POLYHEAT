@@ -1,7 +1,7 @@
 function [meltPeak,firstDer,secDer] = prep2PhaseData(data)
-%PREPDATA Summary of this function goes here
-%   Detailed explanation goes here
-%   Testing this
+%PREPDATA finds the melt peak position, and returns the first and second
+%derivative of heat capacity with respect to temperature. Each derivative
+%is filtered using a savitzky golay filter to reduce noise
    
     [peakMax,peakIndex] = max(data(:,2));
     fd = gradient(data(:,2))./gradient(data(:,1));

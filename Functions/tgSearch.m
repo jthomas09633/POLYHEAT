@@ -30,7 +30,7 @@ function [tgResult,params,yValsFit] = tgSearch(localSegment)
 %
 %************************************************************************%
     xvals = localSegment(:,1);
-    yvals = localSegment(:,2);
+    yvals = sgolayfilt(localSegment(:,2),1,11);
     derYvals = gradient(yvals)./gradient(xvals);
     [~,maxLoc] = max(derYvals);
     maxT = xvals(maxLoc,1);
