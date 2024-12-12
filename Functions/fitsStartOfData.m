@@ -33,8 +33,9 @@ function ssStartOfData = fitsStartOfData(data,minFitLength,sdPeakInt)
 %                   for use in POLYVAL for the error estimates
 %
 %
-%   
-%% Start of Fitting
+% ************************************************************************%
+
+% Start of Fitting
     % endPoint is the simply a point in the rubbery state that is defined
     % as the position left of the first peak in the second derivative of
     % the melt peak, from here we shift left (to lower temperatures) by the

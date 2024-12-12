@@ -24,7 +24,7 @@ function [bestSolidStateFit,rubberyStart] = endOfSSPoint(minFitLength,ssStartOfD
 %   a secondary drop off. As the fits continue to grow passing fully
 %   through the glass transition region the quality of fit will begin to
 %   rise again as now a small sigmoidal like step around a linear
-%   projection yeilds a relitively good linear fit (almost invariant).
+%   projection yields a relatively good linear fit (almost invariant).
 %
 %   An example of this curve is shown in:
 %               ./Figures/Example Solid State rSqrd.png
@@ -41,15 +41,16 @@ function [bestSolidStateFit,rubberyStart] = endOfSSPoint(minFitLength,ssStartOfD
 %       state where you have fully recovered from the glass transition into
 %       the rubbery or "liquid" state.
 %   
+%*************************************************************************%
 
-%% Start of function
+% Start of function
 % Finding the mode region can be a bit tricky depending on how long the
 % solid state region is w.r.t. the length of the rubbery state region.
 % Since the end point of the fits were determined based on the approximate
 % location of the melt peak, if this region is significantly longer than
 % the solid state region the mode may not fall in the red oval. To avoid
 % this we start by finding the green line (or the recovery point). We then
-% only consider the moded of r^2 values before this point, as this would
+% only consider the mode of r^2 values before this point, as this would
 % only be in reference to the actual solid state region.
     funcMinLength = minFitLength;
     rs = vertcat(ssStartOfData.rSqrd); %an array of the r^2 values

@@ -31,6 +31,7 @@ function data = importFiles()
 %   -   Temp vs Time is used for determining segments of DSC. Number of
 %       segments is determined by the number of Ramp segments + Isothermal
 %       segments longer than 1 minute.
+%*************************************************************************%
     [baseFileName, folder] = uigetfile('*','Select One or More Files',...
         'MultiSelect','on');
     if ischar(baseFileName)
