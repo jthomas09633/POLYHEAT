@@ -14,8 +14,14 @@ for i = 1:length(dataStruct)
             dataStruct(i).qualResults{j} = 'No Event';
         elseif strcmp(phaseDynamic,'Glass Transition')
             dataStruct(i).qualResults{j} = 'Glass Transition Only';
-            %result = singlePhaseTg(localSegment,min_fit_length);
-            continue %do this for now, will come back for Tg only assessment
+            result = singlePhaseTg(localSegment,min_fit_length);
+            result.orgIndex = j;
+            if ~isfield(dataStruct,'singlePhaseResult')
+                dataStruct(i).singlePhaseResult = result;
+            else
+                dataStruct(i).singlePhaseResult(end+1) = result;
+            end
+            %continue %do this for now, will come back for Tg only assessment
         else
             dataStruct(i).qualResults{j} = 'Complex Case';
             %dynamic checking

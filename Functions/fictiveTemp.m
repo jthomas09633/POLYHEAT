@@ -32,6 +32,10 @@ function [fictiveTemp,deltaCp] = fictiveTemp(data,eOSS,sORS,fullSS,fullRS)
             break
         end
     end
+    if ~exist("fictiveTemp","var")
+        fictiveTemp = NaN;
+        deltaCp = NaN;
+    end
     deltaCp = funRub(x)-funSolid(x);
 end
 
