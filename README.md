@@ -1,3 +1,4 @@
+![Logo](/Images/Logo2.svg)
 # Automated Heat Capacity Analysis
 
 A MATLAB package for the analysis of the thermodynamic properties of polymers measured using Differential/Fast Scanning Calorimetry. This method was developed with the intention of removing the human component in analysis revolving around the determination of steady state and transition regions. 
@@ -30,13 +31,13 @@ Before running the project, ensure you have the following toolboxes installed:
 ### Basic Use
 1. Run the `main.m` file:
 2. Select the file(s) you wish to analyze 
-3. Sit back, relax, grab a coffee, watch some cars go by, talk to co-worker, work on other things
+3. Sit back, relax, grab a coffee, watch some cars go by, talk to a co-worker, work on other things
 
 Once the code is done analyzing open the variable `dataStruct` and your result will appear!
 
 ---
 # Conventional Heating Segment
-Broadly, the phase change regions can be identified by eye (often referred to as the "eye-test"), but the determination of the true start and end points is highly variable. To overcome this, an automated process built on fundamental polymer physics is required. Below is an example heating segment of PLLA which upon heating undergoes a glass transition and a crystal melt. The primary regions of interest are labeled.
+Broadly, the phase change regions can be identified by eye (often referred to as the “eye-test”), but the determination of the true start and end points is highly variable. To overcome this, an automated process built on fundamental polymer physics is required. Below is an example heating segment of PLLA which upon heating undergoes a glass transition and a crystal melt. The primary regions of interest are labeled.
 
 ![Conventional Eye Test](/Images/eyeTestExample.png)
 
