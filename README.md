@@ -1,5 +1,6 @@
 ![Logo](/Images/Logo2.svg)
-# Automated Heat Capacity Analysis
+# POLYHEAT
+## Automated Heat Capacity Analysis
 
 A MATLAB package for the analysis of the thermodynamic properties of polymers measured using Differential/Fast Scanning Calorimetry. This method was developed with the intention of removing the human component in analysis revolving around the determination of steady state and transition regions. 
 
