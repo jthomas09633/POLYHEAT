@@ -30,9 +30,9 @@ function [tgResult,params,yValsFit] = tgSearch(localSegment)
 %
 %************************************************************************%
     xvals = localSegment(:,1);
-    yvals = sgolayfilt(localSegment(:,2),1,11);
+    yvals = sgolayfilt(localSegment(:,2),1,51);
     derYvals = gradient(yvals)./gradient(xvals);
-    [~,maxLoc] = max(derYvals);
+    [~,maxLoc] = max(sgolayfilt(derYvals,1,211));
     maxT = xvals(maxLoc,1);
     customFunc = @(params,x) ...
         (0.5 +0.5*tanh((x-maxT)/-params(1))).*(params(2)*x+params(3))+...
@@ -49,16 +49,16 @@ function [tgResult,params,yValsFit] = tgSearch(localSegment)
     SSR = sum(residualManual.^2); % total sum of residuals
     SST = sum((yvals-mean(yvals)).^2);
     rsqrd = 1-(SSR/SST);
-        function direction = isPositive(value)
-            if value < 0
-                direction = false;
-            else
-                direction = true;
-            end
+    function direction = isPositive(value)
+        if value < 0
+            direction = false;
+        else
+            direction = true;
         end
-    if rsqrd > 0.95 && abs(log10(params(5))-log10(params(3))) > 0.09 && isPositive(params(2)) == isPositive(params(4))
+    end
+    if rsqrd > 0.75 && abs(log10(params(5))-log10(params(3))) > 0.06 && isPositive(params(2)) == isPositive(params(4))
         tgResult = 1;
-    elseif rsqrd > 0.95
+    elseif rsqrd > 0.9
         %error('No Event Detected')
         tgResult = -1;
     else

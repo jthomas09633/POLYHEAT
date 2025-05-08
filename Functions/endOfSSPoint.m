@@ -1,4 +1,4 @@
-function [bestSolidStateFit,rubberyStart] = endOfSSPoint(minFitLength,ssStartOfData)
+function [bestSolidStateFit,rubberyStart] = endOfSSPoint(localSegment,minFitLength,ssStartOfData)
 %ENDOFSSPOINT Returns the max temperature, and "best" best fit line from
 % ssStart of Data
 %
@@ -52,27 +52,59 @@ function [bestSolidStateFit,rubberyStart] = endOfSSPoint(minFitLength,ssStartOfD
 % this we start by finding the green line (or the recovery point). We then
 % only consider the mode of r^2 values before this point, as this would
 % only be in reference to the actual solid state region.
+    yvals = gradient(localSegment(:,2))./gradient(localSegment(:,1));
+    frameLen = minFitLength*20+1;
+    syvals = sgolayfilt(yvals,1,frameLen);
+    [~,loc] = max(syvals(1:end-minFitLength*2));
     funcMinLength = minFitLength;
     rs = vertcat(ssStartOfData.rSqrd); %an array of the r^2 values
     lens = vertcat(ssStartOfData.length); %an array of the lengths
     fitsCurve = [lens,rs];
+    [~,locOrgMin] = min(fitsCurve(1:loc,2));
     invFitsCurve = [lens,-1*rs]; %inverts curve local mins now peaks
-    [~,locsSS] = findpeaks(invFitsCurve(:,2)); %index of the rubbery start temp
-    rubberyStart = (locsSS(end,1));
-    roundedRs = round(rs(1:rubberyStart,1),3); %rounds rs for simplicity
-    modeRs = mode(roundedRs); %mode of the data from start to rubberyStart
-    goodVals = [];
-    x = 0;
-    for i = 1:length(roundedRs)
-        if roundedRs(i) >= modeRs
-            x = x +1;
-            goodVals(x,1) = lens(i);
-            goodVals(x,2) = fitsCurve(i,2);
+    offset = 0;
+    while ~exist('yPeaks','var')
+        try
+            [yPeaks,xPeaks] = findpeaks(invFitsCurve(loc-offset:end,2)); %index of the rubbery start temp
         end
+        offset = offset+10;
     end
-    bestSolidStateFit.length = goodVals(end,1);
-    bestSolidStateFit.bestFitParam = ...
-        ssStartOfData(goodVals(end,1)-funcMinLength).polyFit;
-    bestSolidStateFit.baseline = ssStartOfData(goodVals(end,1)-funcMinLength).baseline;
+    if ~isempty(yPeaks)
+        [valsSS, maxIdx] = max(yPeaks);
+        locsSS = xPeaks(maxIdx) + loc-offset -1;
+    else
+        valsSS = NaN;
+        locsSS = 2700;
+    end
+    rubberyStart = locsSS;
+    z = 1;
+    lenGoodVals = length(rs);
+    while lenGoodVals > length(rs)/3
+        goodVals = [];
+        z = z+1;
+        roundVals = round(rs(:,1),z);
+        modeVals = mode(roundVals);
+        x = 0;
+        for i = locOrgMin:length(rs)
+            if roundVals(i,1) >= modeVals && i < loc
+                x = x+1;
+                goodVals(x,1) = i;
+                goodVals(x,2) = roundVals(i);
+            end
+        end
+        lenGoodVals = length(goodVals);
+    end
+    %meanVal = floor(mean(goodVals(:,1)));
+    %[~,mid] = min(abs(goodVals(:,1)-meanVal));
+    try
+        len = goodVals(end,1);
+        bestSolidStateFit.length = goodVals(end,1);
+        bestSolidStateFit.bestFitParam = ...
+            ssStartOfData(goodVals(end,1)-funcMinLength).polyFit;
+        bestSolidStateFit.baseline = ssStartOfData(goodVals(end,1)-funcMinLength).baseline;
+    catch
+        error('No fits found')
+    end
+    
 end
 

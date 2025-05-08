@@ -1,4 +1,4 @@
-function [fictiveTemp,deltaCp] = fictiveTemp(data,eOSS,sORS,fullSS,fullRS)
+function [fic,deltaCp] = fictiveTemp(data,eOSS,sORS,fullSS,fullRS)
 %FICTIVETEMP Fictive temperature and heat capacity increment at Tf are
 %determined using the Moynihan method of equal area.
 %
@@ -23,19 +23,23 @@ function [fictiveTemp,deltaCp] = fictiveTemp(data,eOSS,sORS,fullSS,fullRS)
     funRub = @(t) R(t); %lol
     rightSide = integral(funData,data(startPos,1),data(endPos,1))...
         -integral(funSolid,data(startPos,1),data(endPos,1));
+    lim = 1;
     rmsData = rms(data(:,2))/2;
-    for x = data(endPos):-0.005:data(startPos,1)
+    fic = [];
+    y = 0;
+    for x = data(endPos):-0.01:data(startPos,1)
         leftSide = integral(funRub,x,data(endPos,1))...
             -integral(funSolid,x,data(endPos,1));
         if leftSide == rightSide || abs(leftSide-rightSide)<=rmsData
-            fictiveTemp = x;
-            break
+            y = y+1;
+            fic(y,1) = x;
         end
     end
+    fictiveTemp = median(fic);
     if ~exist("fictiveTemp","var")
         fictiveTemp = NaN;
         deltaCp = NaN;
     end
-    deltaCp = funRub(x)-funSolid(x);
+    deltaCp = funRub(fictiveTemp)-funSolid(fictiveTemp);
 end
 

@@ -12,9 +12,13 @@ function allFilesStruct = trimData(allFilesStruct)
             for j = 1:length(allFilesStruct(i).cpHeating)
                 rate = allFilesStruct(i).ratesHeating(j);
                 startTemp = startUpHookEstimator(rate);
-                trimTemp = allFilesStruct(i).cpHeating{j}(1,1)+startTemp;
+                startShift = 10;
+                trimTemp = allFilesStruct(i).cpHeating{j}(1,1)+startTemp+startShift;
                 [~,startLoc] = min(abs(allFilesStruct(i).cpHeating{j}(:,1)-trimTemp));
-                trimmedData = allFilesStruct(i).cpHeating{j}(startLoc:end,:);
+                endTemp = allFilesStruct(i).cpHeating{j}(end,1);
+                endShift = endTemp-2;
+                [~,endLoc] = min(abs(allFilesStruct(i).cpHeating{j}(:,1)-endShift));
+                trimmedData = allFilesStruct(i).cpHeating{j}(startLoc:endLoc,:);
                 allFilesStruct(i).cpHeating{j} = [];
                 allFilesStruct(i).cpHeating{j} = trimmedData;
             end
