@@ -1,8 +1,17 @@
-@software{2025_POLYHEAT,
-  author    = {Thomas, John and Cebe, Peggy and Ralli, Alexis},
-  title     = {POLYHEAT},
-  version   = {1.0},
-  year      = {2025},
-  publisher = {GitHub},
-  url       = {https:https://github.com/jthomas09633/POLYHEAT}
-}
+cff-version: 1.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "Thomas"
+  given-names: "John"
+  orcid: "https://orcid.org/0009-0009-1086-4412"
+- family-names: "Cebe"
+  given-names: "Peggy"
+  orcid: "https://orcid.org/0000-0002-8721-644X"
+- family-names: "Ralli"
+  given-names: "Alexis"
+  orcid: "https://orcid.org/0000-0001-8953-1235"
+title: "POLYHEAT"
+version: 1.0
+doi: 
+date-released: 2025-06-05
+url: "https://github.com/jthomas09633/POLYHEAT"
