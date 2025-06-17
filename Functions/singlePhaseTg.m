@@ -1,4 +1,4 @@
-function result = singlePhaseTg(localSegment,min_fit_length)
+function result = singlePhaseTg(localSegment,min_fit_length,source)
 %SINGLEPHASETG Summary of this function goes here
 %   Detailed explanation goes here
     result = struct('allSolidStateBaselines',[],...
@@ -18,7 +18,7 @@ function result = singlePhaseTg(localSegment,min_fit_length)
         'orgIndex',[]);
     solid_state_SOD = fitsStartOfDataTg(localSegment,min_fit_length);
     result.allSolidStateBaselines = solid_state_SOD;
-    [best_solid_state_fit,rubbery_state_start] = endOfSSPoint(localSegment,min_fit_length,solid_state_SOD);
+    [best_solid_state_fit,rubbery_state_start] = endOfSSPoint(localSegment,min_fit_length,solid_state_SOD,source);
     result.solidStateBaseline = best_solid_state_fit.bestFitParam;
     result.startOfTg = localSegment(best_solid_state_fit.length,1);
     result.endOfTg = localSegment(rubbery_state_start,1);

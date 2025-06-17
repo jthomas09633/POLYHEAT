@@ -1,4 +1,4 @@
-function [bestSolidStateFit,rubberyStart] = endOfSSPoint(localSegment,minFitLength,ssStartOfData)
+function [bestSolidStateFit,rubberyStart] = endOfSSPoint(localSegment,minFitLength,ssStartOfData,source)
 %ENDOFSSPOINT Returns the max temperature, and "best" best fit line from
 % ssStart of Data
 %
@@ -53,14 +53,21 @@ function [bestSolidStateFit,rubberyStart] = endOfSSPoint(localSegment,minFitLeng
 % only consider the mode of r^2 values before this point, as this would
 % only be in reference to the actual solid state region.
     yvals = gradient(localSegment(:,2))./gradient(localSegment(:,1));
-    frameLen = minFitLength*20+1;
-    syvals = sgolayfilt(yvals,1,frameLen);
-    [~,loc] = max(syvals(1:end-minFitLength*2));
+    if strcmp('FSC File',source)
+        frameLen = minFitLength*20+1;
+        syvals = sgolayfilt(yvals,1,frameLen);
+        [~,loc] = max(syvals(1:end-minFitLength*2));
+    else
+        [~,loc] = max(yvals(1:end-minFitLength*2));
+    end
     funcMinLength = minFitLength;
     rs = vertcat(ssStartOfData.rSqrd); %an array of the r^2 values
     lens = vertcat(ssStartOfData.length); %an array of the lengths
     fitsCurve = [lens,rs];
     [~,locOrgMin] = min(fitsCurve(1:loc,2));
+    if locOrgMin == loc || lorOrgMin > loc
+        locOrgMin = 1;
+    end
     invFitsCurve = [lens,-1*rs]; %inverts curve local mins now peaks
     offset = 0;
     while ~exist('yPeaks','var')
@@ -70,11 +77,10 @@ function [bestSolidStateFit,rubberyStart] = endOfSSPoint(localSegment,minFitLeng
         offset = offset+10;
     end
     if ~isempty(yPeaks)
-        [valsSS, maxIdx] = max(yPeaks);
+        [~, maxIdx] = max(yPeaks);
         locsSS = xPeaks(maxIdx) + loc-offset -1;
     else
-        valsSS = NaN;
-        locsSS = 2700;
+        error('No Recovery Point Found')
     end
     rubberyStart = locsSS;
     z = 1;
@@ -83,7 +89,7 @@ function [bestSolidStateFit,rubberyStart] = endOfSSPoint(localSegment,minFitLeng
         goodVals = [];
         z = z+1;
         roundVals = round(rs(:,1),z);
-        modeVals = mode(roundVals);
+        modeVals = mode(roundVals)
         x = 0;
         for i = locOrgMin:length(rs)
             if roundVals(i,1) >= modeVals && i < loc
@@ -94,8 +100,6 @@ function [bestSolidStateFit,rubberyStart] = endOfSSPoint(localSegment,minFitLeng
         end
         lenGoodVals = length(goodVals);
     end
-    %meanVal = floor(mean(goodVals(:,1)));
-    %[~,mid] = min(abs(goodVals(:,1)-meanVal));
     try
         len = goodVals(end,1);
         bestSolidStateFit.length = goodVals(end,1);
