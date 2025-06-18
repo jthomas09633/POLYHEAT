@@ -109,10 +109,13 @@ function data = importFiles()
             tempChangeCol = 4;
         end
         for j = 1:length(zeroPos)
+            fprintf("---------------------------------------------------\n")
+            fprintf("Starting Segment: "+string(j))
             if ntbl(zeroPos(j)+10,4)-ntbl(zeroPos(j),tempChangeCol) == 0
                 continue
             elseif ntbl(zeroPos(j)+10,4)-ntbl(zeroPos(j),tempChangeCol) > 0
                 x = x+1;
+                fprintf(' Heating Segment\n')
                 if j == length(zeroPos)
                     segRate = [];
                     segRate = [ntbl(zeroPos(j):end,2),ntbl(zeroPos(j):end,tempChangeCol)];
@@ -134,12 +137,13 @@ function data = importFiles()
                     minFitLengthH(x,1) = minFitLength;
                 end
             else
+                fprintf(" Cooling Segment\n")
                 y = y+1;
                 if j == length(zeroPos)
                     segRate = [ntbl(zeroPos(j):end,2),ntbl(zeroPos(j):end,tempChangeCol)];
                     P = polyfit(segRate(:,1),segRate(:,2),1);
                     ratesCooling(y,1) = P(1,1);
-                    seg = [ntbl(zeroPos(j):end,tempChangeCol:end)]
+                    seg = [ntbl(zeroPos(j):end,tempChangeCol:end)];
                     [upRes,minFitLength] = resolutionIncrease(seg);
                     cooling{y,1} = upRes;
                     minFitLengthC(y,1) = minFitLength;
@@ -149,6 +153,7 @@ function data = importFiles()
                     P = polyfit(segRate(:,1),segRate(:,2),1);
                     ratesCooling(y,1) = P(1,1);
                     seg = [ntbl(zeroPos(j):zeroPos(j+1)-1,tempChangeCol:end)];
+                    fprintf('')
                     [upRes,minFitLength] = resolutionIncrease(seg);
                     cooling{y,1} = upRes;
                     minFitLengthC(y,1) = minFitLength;
